@@ -1,0 +1,38 @@
+<div class="profile">
+  <h2><%= @trainer.username %> Profile</h2>
+  <img src="<%= @trainer.image_url %>" width="250" height="250">
+  <h4><%= @trainer.safari_balls %> safari balls remaining</h4>
+  <%= link_to "Edit Profile", edit_trainer_path(@trainer) %>
+  <h3>Caught Pokemon</h3>
+  <% @trainer.pokemons.each do |pokemon| %>
+    <div class="pokemon-caught">
+      <h4>National Dex #<%= pokemon.dexnum %> <%= pokemon.name %> </h4>
+      <img src="<%= pokemon.image %>" width="125" height="125">
+      <%= link_to "National Safari Dex Entry", pokemon_path(pokemon) %>
+    
+    <!-- Only the current user should be able to do this -->
+    <span>
+      <form action="<%= remove_pokemon_from_trainer_path(@trainer) %>" method="post">
+        <input type="hidden" name="_method" value='put'>
+        <input type="hidden" name="pokemon_id" value="<%= pokemon.id %>">
+        <input type="submit" value="Release Pokemon">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+      </form>
+    </span>
+    </div>
+  <% end %>
+  <!-- I need to find a way to move this outside this show.html.erb for the Safari -->
+  <form action="<%= add_pokemon_to_trainer_path(@trainer) %>" method="post">
+    <input type="hidden" name="_method" value="put">
+      <select name="pokemon_id">
+        <% Pokemon.all.each do |pokemon| %>
+          <option value="<%= pokemon.id %>"> #<%= pokemon.dexnum %> <%= pokemon.name%></option>
+        <% end %>
+      </select>
+      <input type="submit" value="Catch Pokemon">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  </form>
+  <br>
+  <br>
+  <%= link_to "Back to Trainer List", trainers_path %>
+</div>

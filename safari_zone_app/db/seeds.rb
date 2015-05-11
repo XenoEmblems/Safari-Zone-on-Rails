@@ -7,9 +7,42 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'HTTParty'
 
+
 Pokemon.destroy_all
 
-pokemon_hash = {
+#I want a number to down/up from 1 to 718 and then make calls to this api 
+# poke_api = HTTParty.get("http://pokeapi.co/api/v1/pokemon/") + #num#)
+# and generate this image.
+
+#There is an URI in each API call that needs to be accessed
+# poke_desc_uri = pokemon_data["descriptions"][num]["resource_uri"] 
+# # When the uri is found the API is called again for the Pokemon description
+# poke_desc = HTTParty.get("http://pokeapi.co/" + poke_desc_uri)
+# # The description API is then searched for the text
+# poke_desc_text = poke_desc["description"]
+
+#:name
+# poke_name = poke_api["name"]
+#:type Finds the location of types in the hash as an Array
+# poke_types_loc = pokemon_hash["pokemon"][(num)]["types"]
+# Splits the Array and capitalize the first letter in each type and 
+#then joins them with a /
+
+# poke_types = poke_types_loc.join(" ").split.map(&:capitalize)*'/'
+
+#:catch_rate is picked up from each Pokemon
+# catch_rate = pokemon_hash["pokemon"][num]["catchRate"]
+#:run_rate
+# run_rate = 70
+# #:image
+# poke_image = HTTParty.get("http://pokeapi.co/media/img/" + num + ".png") 
+# #num should be counting from 1 to 718 alongside the poke_api
+
+# pokedex = poke_api["pkdx_id"]
+
+# I need to change this into a JSON string and then Parse it.
+
+pokemon_hash = JSON.parse('{
   "pokemon": [{
     "id": 1,
     "name": "Bulbasaur",
@@ -750,7 +783,7 @@ pokemon_hash = {
     "types": ["electric", "steel"]
   }, {
     "id": 83,
-    "name": "Farfetch'd",
+    "name": "Farfetchd",
     "catchRate": 45,
     "weight": 33.1,
     "moonstone": false,
@@ -6473,49 +6506,53 @@ pokemon_hash = {
     "baseSpeed": 95,
     "types": ["dragon", "ground"]
   }]
-}
+}')
+pokemon_hashed = pokemon_hash["pokemon"]
 
-#I want a number to down/up from 1 to 718 and then make calls to this api 
-poke_api = HTTParty.get("http://pokeapi.co/api/v1/pokemon/") + #num#)
-# and generate this image.
 
-#There is an URI in each API call that needs to be accessed
-poke_desc_uri = pokemon_data["descriptions"][num]["resource_uri"] 
-# When the uri is found the API is called again for the Pokemon description
-poke_desc = HTTParty.get("http://pokeapi.co/" + poke_desc_uri)
-# The description API is then searched for the text
-poke_desc_text = poke_desc["description"]
+for num in 1..718 do
+  hashnum = num - 1
+  pokelink = "http://pokeapi.co/api/v1/pokemon/" + num.to_s
+  poke_api = HTTParty.get(pokelink)
+  poke_name = poke_api["name"]
+  # Finds the URI in the API
+  poke_desc_uri = poke_api["descriptions"][0]["resource_uri"] 
+  # When the uri is found the API is called again for the Pokemon description
+  poke_desc = HTTParty.get("http://pokeapi.co/" + poke_desc_uri)
+  # The description API is then searched for the text
+  poke_desc_text = poke_desc["description"]
+  poke_image = "http://pokeapi.co/media/img/" + num.to_s + ".png"
+  catch_rate = pokemon_hashed[hashnum]["catchRate"]
+  types = pokemon_hashed[hashnum]["types"].join(" ").split.map(&:capitalize)*'/'
 
-#:name
-poke_name = poke_api["name"]
-#:type Finds the location of types in the hash as an Array
-poke_types_loc = pokemon_hash["pokemon"][(num)]["types"]
-# Splits the Array and capitalize the first letter in each type and 
-#then joins them with a /
-
-poke_types = poke_types_loc.join(" ").split.map(&:capitalize)*'/'
-
-#:catch_rate is picked up from each Pokemon
-catch_rate = pokemon_hash["pokemon"][num]["catchRate"]
-#:run_rate
-run_rate = 70
-#:image
-poke_image = HTTParty.get("http://pokeapi.co/media/img/" + num + ".png") 
-#num should be counting from 1 to 718 alongside the poke_api
-
-pokedex = poke_api["pkdx_id"]
-
-718.times do
   Pokemon.create({
     name: poke_name,
-    type: poke_types,
+    poke_types: types,
     description: poke_desc_text,
     catch_rate: catch_rate,
     run_rate: 70,
     image: poke_image,
-    dexnum: pokedex
+    dexnum: num
     })
-end
+
+end 
+
+
+
+
+# pokemon_hash["pokemon"].each do |pokemon|
+#   name = pokemon["name"]
+#   catch_rate = pokemon["catchRate"] 
+#   types = pokemon["types"].join(" ").split.map(&:capitalize)*'/'
+
+#   Pokemon.create({
+#     name: name,
+#     catch_rate: catch_rate,
+#     poke_types: types
+#     })
+# end
+
+
 
 
 

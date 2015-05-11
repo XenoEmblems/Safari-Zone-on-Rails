@@ -1,0 +1,14 @@
+<h3> Trainer Edit</h3>
+
+<%= form_for(@trainer) do |f| %>
+  <br>
+  <%= f.label :image_url %>
+  <%= f.text_field :image_url %>
+  <br>
+  <p>Safari Balls will now be refilled</p>
+  <%= f.hidden_field :safari_balls, :value => 100 %>
+  <br>
+  <br>
+  <%= f.submit %>
+
+<% end %>

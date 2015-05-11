@@ -8,7 +8,22 @@
 </head>
 <body>
 
+<h1> Safari Zone: An Unofficial Online Pokemon Catching Game</h1>
+<% if current_user %>
+  <p>
+    Ready to catch Pokemon <%= current_user.username %>?
+    <%= link_to 'Log Out', sessions_path, method: :delete %>
+  </p>
+<%= link_to 'Trainer List', trainers_path %>
+<% else %>
+  <p>
+    <%= link_to 'Sign Up', new_trainer_path %>
+    <%= link_to 'Log In', sessions_new_path %>
+  </p>
+<% end %>
+
+<%= link_to 'National Safari Pokedex', pokemons_path %>
+<%= link_to 'Back Home', root_path %>
 <%= yield %>
 
-</body>
 </html>
