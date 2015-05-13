@@ -1,3 +1,4 @@
+<div class="pokedex">
   <h1>National Dex #<%= @pokemon.dexnum %><h1>
   <h2><%= @pokemon.name %></h2>
   <img src="<%= @pokemon.image %>" height="300" width="300" data-id=<%= @pokemon.id %> />
@@ -5,5 +6,5 @@
   <p><b>Description:</b> <%= @pokemon.description %></p>
   <p><b>Catch Rate:</b> <%= @pokemon.catch_rate %></p>
 
-  <!-- Here for now. -->
  <%= link_to "Back to Pokedex", pokemons_path %>
+</div>

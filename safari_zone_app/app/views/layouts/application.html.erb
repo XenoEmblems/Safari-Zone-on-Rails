@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SafariZoneApp</title>
+  <title>SafariZone</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<h1> Safari Zone: An Unofficial Online Pokemon Catching Game</h1>
+
 <% if current_user %>
-  <p>
-    Ready to catch Pokemon <%= current_user.username %>?
-    <%= link_to 'Log Out', sessions_path, method: :delete %>
-  </p>
-<%= link_to 'Trainer List', trainers_path %>
+  <div class= "top">
+    <h1>Safari Zone</h1> <img src="http://images1.wikia.nocookie.net/__cb20110615101343/pokemon/images/4/46/Safari_Ball.png">
+    <p>Ready to catch Pokemon <%= current_user.username %>?  
+    <%= link_to 'Log Out', sessions_path, method: :delete %></p>
+    <%= link_to 'National Safari Pokedex', pokemons_path %><br>
+    <%= link_to 'To the Safari!', root_path %><br>
+    <%= link_to 'Trainer List', trainers_path %><br>
+  </div>
+
 <% else %>
-  <p>
-    <%= link_to 'Sign Up', new_trainer_path %>
-    <%= link_to 'Log In', sessions_new_path %>
-  </p>
+
+  <div class= "top">
+      <h1>Safari Zone</h1>
+      <img src="http://images1.wikia.nocookie.net/__cb20110615101343/pokemon/images/4/46/Safari_Ball.png">
+      <h2>You Must Be Logged In Order To Play</h2>
+      <%= link_to 'Sign Up', new_trainer_path %><br>
+      <%= link_to 'Log In', sessions_new_path %><br>
+      <%= link_to 'National Safari Pokedex', pokemons_path %><br>
+  </div>
 <% end %>
 
-<%= link_to 'National Safari Pokedex', pokemons_path %>
-<%= link_to 'Back Home', root_path %>
+
 <%= yield %>
 
 </html>
