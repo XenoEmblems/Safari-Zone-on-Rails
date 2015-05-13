@@ -2,11 +2,13 @@
 
 <% link_to "Back to Entrance", root_path %>
 <% @trainers.each do |trainer| %>
-  <h3>
-    <img src="<%= trainer.image_url %>" width="125" height="125">
-    <%= trainer.username %>
-    <%= link_to "View Trainer Profile", trainer_path(trainer) %>
-  </h3>
+<div class="pokedex">
+    <br>
+    <img src="<%= trainer.image_url %>" width="250" height="250"><br>
+    <h2><%= trainer.username %></h2>
+    <%= link_to "View Trainer Profile", trainer_path(trainer) %><br>
+    <br>
+</div>
 <% end %>
 
     

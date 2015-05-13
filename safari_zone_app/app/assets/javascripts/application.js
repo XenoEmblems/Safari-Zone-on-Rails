@@ -52,13 +52,13 @@ var getRandomPokemon = function () {
 }
 
 var renderSafari = function(data) {
-  $('.safari').html(
+  $('.safari').attr('data-id', data.id).html(
     '<h2>A wild ' + data.name + ' has appeared!!</h2>' +
-    '<img src="' + data.image + '"height="300" width="300">' +
-    '<p> Catch Rate:' + data.catch_rate +' </p>' +
-    '<p> Run Rate:' + data.run_rate +' </p>'
+    '<img src="' + data.image + '"height="300" width="300">'
+    // '<p> Catch Rate: ' + data.catch_rate +' </p>' +
+    // '<p> Run Rate: ' + data.run_rate +' </p>'
   )
-  
+  var currentName = this.name
 }
 
 var runAway = function() {
@@ -68,23 +68,27 @@ var runAway = function() {
   )
 }
 
-var catchPokemon = function(data) {
+var catchPokemon = function() {
+  var id = parseInt($(".safari").attr('data-id'));
+  $.ajax({
+    url: "/trainers/" +  id + "/add_pokemon",
+    method: "PUT",
+    dataType: "json"
+  }).done(getRandomPokemon())
   $('.events').html(
-    '<h2>You thrown a Safari Ball!</h2>'
+    '<h2>This Pokemon has been caught and sent to your Profile!!</h2>'
   )
 }
 
 var throwRock = function(data) {
   $('.events').html(
-    '<h2>You thrown a rock at the Pokemon!</h2>' +
-    '<h2>The Pokemon is now angry!</h2>'
+    '<h2>You thrown a rock at the Pokemon and is now furious!</h2>'
   )
 }
 
 var throwBait = function(data) {
   $('.events').html(
-    '<h2>You thrown bait towards the Pokemon!</h2>' +
-    '<h2>The Pokemon is now feeding!</h2>'
+    '<h2>You thrown bait towards the Pokemon and is now eatingx!</h2>'
   )
 }
 

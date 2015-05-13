@@ -1,20 +1,23 @@
 <h3>Trainer Sign Up</h3>
 
-<%= form_for @trainer do |f| %>
+<%= form_for @trainer, :html => { :class => 'log_form'} do |f| %>
   <br>
-  <%= f.label :username %>
+  <%= f.label :username %><br>
+  <br>
   <%= f.text_field :username %>
   <br>
   <br>
-  <%= f.label :password %>
+  <%= f.label :password %><br>
+  <br>
   <%= f.password_field :password %>
   <br>
   <br>
-  <%= f.label :password_confirmation %>
+  <%= f.label :password_confirmation %><br>
+  <br>
   <%= f.password_field :password_confirmation %>
   <br>
   <br>
-  <%= f.label :image_url %>
+  <p>Trainer Profile Image Url</p>
   <%= f.text_field :image_url %>
 
   <%= f.hidden_field :safari_balls, :value => 100 %>

@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
     render :json => @pokemon
   end
 
+  def authenticate
+    redirect_to sessions_new_path unless current_user
+  end
+
 end

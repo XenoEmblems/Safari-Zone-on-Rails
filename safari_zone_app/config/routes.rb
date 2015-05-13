@@ -24,4 +24,6 @@ Rails.application.routes.draw do
 
   get 'safari_zone/:id' => 'application#safari_zone'
 
+  put 'catch_pokemon/:id' => 'application#catch_pokemon'
+
 end

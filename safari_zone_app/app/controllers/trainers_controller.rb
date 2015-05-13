@@ -1,4 +1,7 @@
 class TrainersController < ApplicationController
+  before_action :authenticate, except: :new
+  before_filter :validate_user, :only => [:remove_pokemon, :edit]
+
   def index
     @trainers = Trainer.all
 
@@ -15,7 +18,7 @@ class TrainersController < ApplicationController
   def create
     @trainer = Trainer.new(trainer_params)
     if @trainer.save
-      redirect_to trainers_path
+      redirect_to root_path
     else
       render :index
     end
@@ -46,8 +49,8 @@ class TrainersController < ApplicationController
   end
 
   def add_pokemon
-    trainer = Trainer.find(params[:id])
-    pokemon = Pokemon.find(params[:pokemon_id])
+    trainer = Trainer.find(session[:current_user])
+    pokemon = Pokemon.find(params[:id])
 
     trainer.add_pokemon(pokemon)
 
@@ -67,6 +70,10 @@ class TrainersController < ApplicationController
       format.html { redirect_to trainer_path(trainer) }
       format.json { render json: @trainer }
     end
+  end
+
+  def validate_user
+    redirect_to trainers_path unless current_user.id.to_s == params[:id]
   end
 
   private
