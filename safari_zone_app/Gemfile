@@ -45,5 +45,8 @@ group :development, :test do
   gem 'httparty'
   gem 'pokegem'
 
+  gem 'rails_12factor', group: :production
+
+
 end
 
