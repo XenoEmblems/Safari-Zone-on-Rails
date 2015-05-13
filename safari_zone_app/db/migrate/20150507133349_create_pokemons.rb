@@ -2,7 +2,7 @@ class CreatePokemons < ActiveRecord::Migration
   def change
     create_table :pokemons do |t|
       t.string :name
-      t.string :type
+      t.string :poke_types
       t.text :description
       t.integer :catch_rate
       t.integer :run_rate

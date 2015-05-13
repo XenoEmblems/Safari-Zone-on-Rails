@@ -1,0 +1,12 @@
+<!-- Only people signed in should be here -->
+
+<% link_to "Back to Entrance", root_path %>
+<% @trainers.each do |trainer| %>
+  <h3>
+    <img src="<%= trainer.image_url %>" width="125" height="125">
+    <%= trainer.username %>
+    <%= link_to "View Trainer Profile", trainer_path(trainer) %>
+  </h3>
+<% end %>
+
+    

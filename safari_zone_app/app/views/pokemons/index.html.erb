@@ -1,0 +1,12 @@
+<h2>National Safari Pokedex</h2>
+
+<% @pokemons.each do |pokemon| %>
+  <li><h3>National Dex #<%= link_to pokemon.dexnum, pokemon_path(pokemon) %><h3></li>
+  <h4><%= pokemon.name %></h4>
+  <img src="<%= pokemon.image %>"/>
+  <h4>Type: <%= pokemon.poke_types %></h4>
+  <p><b>Description:</b> <%= pokemon.description %></p>
+  <p><b>Catch Rate:</b> <%= pokemon.catch_rate %></p>
+  <p><b>Run Rate:</b> <%= pokemon.run_rate %></p>
+  <p></li>
+<% end %>

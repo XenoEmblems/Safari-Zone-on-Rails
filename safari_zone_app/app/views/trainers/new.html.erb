@@ -1,0 +1,25 @@
+<h3>Trainer Sign Up</h3>
+
+<%= form_for @trainer do |f| %>
+  <br>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <br>
+  <br>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <br>
+  <br>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+  <br>
+  <br>
+  <%= f.label :image_url %>
+  <%= f.text_field :image_url %>
+
+  <%= f.hidden_field :safari_balls, :value => 100 %>
+  <br>
+  <br>
+  <%= f.submit %>
+
+<% end %>

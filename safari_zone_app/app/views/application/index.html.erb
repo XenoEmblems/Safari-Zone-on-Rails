@@ -1,0 +1,36 @@
+<h2> Welcome to the Safari Zone!! </h2>
+
+<% if current_user %>
+<div class="hidden" style="display: none;"> current_user.id </div>
+<div class="hidden" style="display: none;"> current_user.id </div>
+<div class="safariZone">
+<div class= "safari">
+
+</div>
+
+<div class="options">
+    <button id="safari_ball">Safari Ball</button>
+    <button id="bait">Bait</button>
+    <button id="rock">Rock</button>
+    <button id="run">Run</button>
+</div>
+<br>
+<div class= "events">
+</div>
+</div>
+<br>
+<div class= "Rules">
+  <h3> Pokemon Safari Alpha rules</h3>
+  <p>When traversing through the Safari Zone a random Pokemon should appear.</p>
+  <p>You must try to catch with a Safari Ball or try to lure/weaken it with bait and rocks.</p>
+  <p>Bait will lure the Pokemon towards you and will not run as often but it will be harder to catch.</p>
+  <p>Rocks will make the Pokemon angry and will be easier to catch but will run much more often.</p>
+  <p>Running away will have you run from the current Pokemon and another one will take its place.</p>
+
+  <h4>Safari Zone Alpha Tidbits</h4>
+  <p> Editing your Trainer Profile automatically refills your Safari Ball Count to 100.</p>
+  <p> Only one of each Pokemon can be caught. You will have to give multiples bak to the Safari Zone.</p>
+</div>
+<% else %>
+  <p> You need to log in order to play this game </p>
+<% end %>
