@@ -22,4 +22,6 @@ Rails.application.routes.draw do
 
   delete 'sessions' => 'sessions#destroy'
 
+  get 'safari_zone/:id' => 'application#safari_zone'
+
 end

@@ -6,11 +6,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def index
-    
+
   end
 
   def current_user
     Trainer.find_by(id: session[:current_user])
+  end
+
+  def safari_zone
+    @pokemon = Pokemon.find(params[:id])
+    render :json => @pokemon
   end
 
 end
