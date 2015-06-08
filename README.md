@@ -13,6 +13,8 @@ This App was made with Ruby on Rails using a Postgres Database with use of jQuer
 
 #Demo
 Github: https://goomy-safari.herokuapp.com/
+Username: guest
+Password: guest
 Actions affecting and involving the catch rate of the pokemon are not put into effect as of this point but are going to be added in the future.
 
 
